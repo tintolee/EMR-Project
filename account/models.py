@@ -7,9 +7,24 @@ from django.utils import timezone
 USER_CHOICES = [
     ('D', 'Doctor'),
     ('P', 'Patient'),
-    ('R', 'Receptionist'),
     ('HR', 'HR')
 ]
+
+SHIFT_CHOICES = (
+    ("Day", "Day"),
+    ("Night", "Night"),
+)
+
+STAFF_CHOICES = (
+    ("Doctor", "Doctor"),
+    ("Nurse", "Nurse"),
+    ("Public Health Officer", "Public Health Officer"),
+    ("Cleaner", "Cleaner"),
+    ("Security", "Security"),
+    ("Driver", "Driver"),
+    ("Counselor", "Counselor"),
+    ("Nutritionist", "Nutritionist"),
+)
 
 class User(AbstractUser):
     user_type = models.CharField(choices=USER_CHOICES, max_length=2)
@@ -79,3 +94,10 @@ class Patient(BaseInfo):
     def __str__(self):
         return self.name
 
+
+class Staff(BaseInfo):
+    
+    position = models.CharField(max_length=100, choices=STAFF_CHOICES)
+    employment_date = models.DateTimeField()
+    shift = models.CharField(max_length=20, choices=SHIFT_CHOICES)
+    

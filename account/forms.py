@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from . models import  Patient
+from . models import  Patient, Staff
 
 USER_CHOICES = [
     ('D', 'Doctor'),
@@ -23,5 +23,11 @@ class UserCreateForm(UserCreationForm):
 class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
+        fields = ('__all__')
+
+
+class StaffForm(forms.ModelForm):
+    class Meta:
+        model = Staff
         fields = ('__all__')
 

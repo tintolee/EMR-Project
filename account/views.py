@@ -4,8 +4,39 @@ from django.views.generic import CreateView
 from django.shortcuts import redirect, render
 from .forms import * 
 from user_profile.models import UserProfile
-from . models import  Patient
+from . models import  Patient, Staff
 
+
+
+def add_staff(request, id=0):
+    if request.method == "GET":
+        if id == 0:
+            form = StaffForm()
+        else:
+            staff = Staff.objects.get(pk=id)
+            form = StaffForm(instance=staff)
+        return render(request, "add_staff.html", {"form": form})
+    else:
+        if id == 0:
+            form = StaffForm(request.POST)
+        else:
+            staff = Staff.objects.get(pk=id)
+            form = StaffForm(request.POST, instance=staff)
+        if form.is_valid():
+            form.save()
+        return redirect('account:staff')
+
+
+def staff_details(request, id):
+    staff = Staff.objects.get(pk=id)
+    context = {
+        "staff": staff
+    }
+    return render(request, "staff_details.html", context)
+
+def staffs(request):
+    staffs = Staff.objects.all()
+    return render(request, "staff.html", {"account:staffs": staffs})
 
 def patients(request):
     patients = Patient.objects.all()
