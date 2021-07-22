@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User, AbstractUser
 from django.utils import timezone
 
-# Create your models here.
+# Models to be stored in the database
 
 USER_CHOICES = [
     ('D', 'Doctor'),
@@ -41,11 +41,7 @@ class User(AbstractUser):
         else:
             return False
 
-    def is_receptionist(self):
-        if self.user_type == 'R':
-            return True
-        else:
-            return False
+    
 
     def is_HR(self):
         if self.user_type == 'HR':

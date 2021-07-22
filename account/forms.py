@@ -9,6 +9,8 @@ USER_CHOICES = [
     ('HR', 'HR')
 ]
 
+#User creation form
+
 class UserCreateForm(UserCreationForm):
     user_type = forms.ChoiceField(choices=USER_CHOICES, required=True, widget=forms.RadioSelect)
     class Meta:
@@ -20,12 +22,14 @@ class UserCreateForm(UserCreationForm):
         self.fields["username"].label = "Username"
         self.fields["email"].label = "Email address"
 
+
+#Patient creation form
 class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
         fields = ('__all__')
 
-
+#staff creation form
 class StaffForm(forms.ModelForm):
     class Meta:
         model = Staff

@@ -7,7 +7,7 @@ from user_profile.models import UserProfile
 from . models import  Patient, Staff
 
 
-
+ #function to add staff
 def add_staff(request, id=0):
     if request.method == "GET":
         if id == 0:
@@ -26,7 +26,7 @@ def add_staff(request, id=0):
             form.save()
         return redirect('account:staff')
 
-
+#function to view staff details
 def staff_details(request, id):
     staff = Staff.objects.get(pk=id)
     context = {
@@ -80,6 +80,7 @@ def add_patient(request, id=0):
 def home(request):
     return render(request, 'account/home.html')
 
+#function to view main dashboard by the HR
 def main_dash(request):
     return render(request, "maindash.html")
 
